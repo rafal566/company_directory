@@ -3,6 +3,7 @@
 include("config.php");
 
 $conn = mysqli_connect($cd_host, $cd_user, $cd_socket, $cd_dbname, $cd_port, $cd_password);
+// $conn = new mysqli($cd_host, $cd_user, $cd_password, $cd_dbname, $cd_port, $cd_socket);
 
 if(isset($_POST["userID"])) {
     // $temp_id = $_POST['id'];

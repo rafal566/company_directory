@@ -3,6 +3,7 @@
 include("config.php");
 
 $conn = mysqli_connect($cd_host, $cd_user, $cd_socket, $cd_dbname, $cd_port, $cd_password);
+// $conn = new mysqli($cd_host, $cd_user, $cd_password, $cd_dbname, $cd_port, $cd_socket);
 
 $temp_id = $_POST['userID'];
 $userID = (int)$temp_id;
@@ -14,6 +15,5 @@ $userID = (int)$temp_id;
   Record deleted!
   </div>";
   // mysqli_close($conn);
-
 
     ?>

@@ -18,6 +18,7 @@ h4 {
   color: #f5f7f7;
 }
 
+
 /* alerts */
 .alert {
   padding: 1.5rem 1.5rem;
@@ -46,8 +47,13 @@ h4 {
 }
 
 /* Add button */
-.btn-success {
+.addButton_div {
   margin: 20px 0;
+  float: left;
+}
+
+.addButton_div {
+  text-align: center;
 }
 
 [type=search] {
@@ -77,10 +83,6 @@ input:valid#firstName, input:valid#lastName, input:valid#email {
 }
 
 /* table */
-#userData_wrapper, .banner, #footer {
-  border: 2px solid #72b5b7;
-  border-radius: 3px;
-}
 
 .table-bordered {
     border: 0;
@@ -111,10 +113,10 @@ table.dataTable>tbody>tr.child span.dtr-title {
   min-width: 120px;
 }
 
-table.dataTable.no-footer {
+/* table.dataTable.no-footer {
   border-bottom: 2px solid #72b5b7;
   border-top: 2px solid #72b5b7;
-}
+} */
 
 
 /* output massage */
@@ -148,4 +150,11 @@ table.dataTable.no-footer {
 #footer {
   margin: 20px auto 0 auto;
   width: 90%;
+}
+
+@media only screen and (max-width: 640px) {
+  .addButton_div {
+    float: none;
+    text-align: center;
+  }
 }

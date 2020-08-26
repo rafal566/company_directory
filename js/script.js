@@ -11,14 +11,14 @@ $(document).ready(function() {
 
   // get Table
   let dataTable = $('#userData').DataTable({
-    // "bPaginate":true,
-    // "sPaginationType":"full_numbers",
-    // "bLengthChange": true,
+    "scrollY": "50vh",
+    "scrollCollapse": true,
+    "autoWidth":true,
+    "api": true,
     "lengthMenu": [
       [10, 25, 50, -1],
       [10, 25, 50, "All"]
     ],
-    "autoWidth": false,
     "serverSide": true,
     "order": [],
     "ajax": {
