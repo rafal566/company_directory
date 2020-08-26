@@ -1,0 +1,151 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #ffffff;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1em;
+  background-color: #f5f7f7;
+}
+
+p {
+  margin-bottom: 0;
+}
+
+h4 {
+  color: #f5f7f7;
+}
+
+/* alerts */
+.alert {
+  padding: 1.5rem 1.5rem;
+  margin-bottom: 0;
+  font-size: 1.5rem;
+}
+
+.alert-dismissible .close {
+    padding: .5rem .5rem;
+}
+
+/* banner */
+.banner, #footer {
+  font-family: 'Concert One';
+  padding: 20px 0;
+  background-color: #e9e9e9;
+  color: #72b5b7;
+  text-align: center;
+  height: 15%;
+  vertical-align: middle;
+  margin-bottom: 0;
+}
+
+.banner {
+  padding: 20px 0;
+}
+
+/* Add button */
+.btn-success {
+  margin: 20px 0;
+}
+
+[type=search] {
+    outline-offset: 0;
+}
+
+
+/* modal */
+label {
+  font-weight: bold;
+}
+
+.modal-header, .modal-footer {
+  background-color: #b0cac7;
+}
+
+.modal-body {
+  background-color: #f6f5f5;
+}
+
+input:invalid#firstName, input:invalid#lastName, input:invalid#email {
+  border: 1px solid red;
+}
+
+input:valid#firstName, input:valid#lastName, input:valid#email {
+  border: 1px solid green;
+}
+
+/* table */
+#userData_wrapper, .banner, #footer {
+  border: 2px solid #72b5b7;
+  border-radius: 3px;
+}
+
+.table-bordered {
+    border: 0;
+}
+
+#table {
+  width: 90%;
+  margin: 0 auto 20px auto;
+}
+
+.table td, .table th {
+  vertical-align: middle;
+}
+
+.odd>td:last-of-type, .even>td:last-of-type {
+  text-align: center;
+}
+
+.btn-warning {
+  margin-right: 10px;
+}
+
+.table th:last-child {
+  text-align: center;
+}
+
+table.dataTable>tbody>tr.child span.dtr-title {
+  min-width: 120px;
+}
+
+table.dataTable.no-footer {
+  border-bottom: 2px solid #72b5b7;
+  border-top: 2px solid #72b5b7;
+}
+
+
+/* output massage */
+#message {
+  width: 30%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  z-index: 99999999;
+}
+
+@media only screen and (max-width: 500px) {
+  table.dataTable>tbody>tr.child span.dtr-title {
+    display: block;
+    min-width: 150px;
+    font-weight: bold;
+  }
+
+  .alert {
+    padding: .75rem 1.25rem;
+    margin-bottom: 0;
+  }
+
+  #message {
+    width: 60%;
+  }
+}
+
+#footer {
+  margin: 20px auto 0 auto;
+  width: 90%;
+}

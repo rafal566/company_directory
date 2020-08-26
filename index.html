@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Concert+One|Montserrat&display=swap" rel="stylesheet">
+  <!-- bootstrap -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+  <!-- table styles -->
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/dataTables.jqueryui.min.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.5/css/responsive.jqueryui.min.css">
+  <!-- my styles -->
+  <link rel="stylesheet" href="styles/style.css">
+  <title>Company Directory</title>
+</head>
+
+<body>
+  <!-- alert message -->
+  <div id="message"></div>
+
+  <!-- content -->
+  <div id="table">
+    <h1 class="banner text-uppercase text-center">Company Directory</h1>
+    <!-- modal -->
+    <div class="modal fade" id="employeeModal" data-backdrop="static">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Add</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+          <form id="userForm" enctype="multipart/form-data">
+            <div class="modal-body">
+              <div class="form-group">
+                <label for="firstName">First Name</label>
+                <input type="text" name="firstName" class="form-control" id="firstName" placeholder="First Name" required>
+              </div>
+              <div class="form-group">
+                <label for="lastName">Last Name</label>
+                <input type="text" name="lastName" class="form-control" id="lastName" placeholder="Last Name" required>
+              </div>
+              <div class="form-group">
+                <label for="departmentID">Department</label><br>
+                <select class="form-control" name="departmentID" id="departmentID">
+                  <option value="1">Human Resources</option>
+                  <option value="2">Sales</option>
+                  <option value="3">Marketing</option>
+                  <option value="4">Legal</option>
+                  <option value="5">Services</option>
+                  <option value="6">Research and Development</option>
+                  <option value="7">Product Managment</option>
+                  <option value="8">Training</option>
+                  <option value="9">Support</option>
+                  <option value="10">Engineering</option>
+                  <option value="11">Accounting</option>
+                  <option value="12">Business Development</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="jobTitle">Job title</label><br>
+                <select class="form-control" name="jobTitle" id="jobTitle">
+                  <!-- <option value=""></option> -->
+                  <option value="HR Director">HR Director</option>
+                  <option value="HR Manager">HR Manager</option>
+                  <option value="HR Advisor">HR Advisor</option>
+                  <option value="Sales Director">Sales Director</option>
+                  <option value="Sales Manager">Sales Manager</option>
+                  <option value="Sales Specialist">Sales Specialist</option>
+                  <option value="Marketing Director">Marketing Director</option>
+                  <option value="Marketing Manager">Marketing Manager</option>
+                  <option value="Project Manager">Project Manager</option>
+                  <option value="Legal Director">Legal Director</option>
+                  <option value="Comissioner">Comissioner</option>
+                  <option value="Legal Advisor">Legal Advisor</option>
+                  <option value="IT Director">IT Director</option>
+                  <option value="IT Manager">IT Manager</option>
+                  <option value="Cyber Security">Cyber Security</option>
+                  <option value="System Analyst">System Analyst</option>
+                  <option value="IT Technican">IT Technican</option>
+                  <option value="R&D Director">R&D Director</option>
+                  <option value="R&D Manager">R&D Manager</option>
+                  <option value="R&D Officer">R&D Officer</option>
+                  <option value="Chief Product Officer">Chief Product Officer</option>
+                  <option value="Director Of PM">Director Of PM</option>
+                  <option value="Head Of PM">Head Of PM</option>
+                  <option value="Product Manager">Product Manager</option>
+                  <option value="Junior Product Manager">Junior Product Manager</option>
+                  <option value="Training Director">Training Director</option>
+                  <option value="Training Manager">Training Manager</option>
+                  <option value="Training Assistant">Training Assistant</option>
+                  <option value="Customer Service Director">Customer Service Director</option>
+                  <option value="Customer Service Manager">Customer Service Manager</option>
+                  <option value="Customer Service Support">Customer Service Support</option>
+                  <option value="Engineering Manager">Engineering Manager</option>
+                  <option value="Engineering Project Manager">Engineering Project Manager</option>
+                  <option value="Engineering Team Leader">Engineering Team Leader</option>
+                  <option value="Project Engineer">Project Engineer</option>
+                  <option value="Accounting Director">Accounting Director</option>
+                  <option value="Accounting Manager">Accounting Manager</option>
+                  <option value="Senior Accountant">Senior Accountant</option>
+                  <option value="Finance Assistant">Finance Assistant</option>
+                  <option value="Business Development Director">Business Development Director</option>
+                  <option value="Business Development Manager">Business Development Manager</option>
+                  <option value="Business Development Executive">Business Development Executive</option>
+                </select>
+                <!-- <input type="text" name="jobTitle" class="form-control" id="jobTitle" placeholder="Job title"> -->
+              </div>
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" name="email" class="form-control" id="email" placeholder="Email" required>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <input type="hidden" id="userID" name="userID">
+              <input type="hidden" id="operation" name="operation">
+              <input type="submit" id="submitButton" class="btn btn-success" value="Add">
+              <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Add Button -->
+    <button id="addButton" class="btn btn-success" data-toggle="modal" data-target="#employeeModal"><i class="glyphicon glyphicon-plus"></i> Add Person</button>
+
+    <table id="userData" class="table table-striped table-bordered dt-responsive nowrap">
+      <thead>
+        <tr>
+          <!-- <th>ID</th> -->
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Job Title</th>
+          <th>Email</th>
+          <th>Department</th>
+          <th>Location</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+
+  </div>
+  <!-- jquery & bootstrap -->
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+  <script src="https://kit.fontawesome.com/60efb0e821.js" crossorigin="anonymous"></script>
+  <!-- tables -->
+  <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js" charset="utf-8"></script>
+  <script src="https://cdn.datatables.net/responsive/2.2.5/js/dataTables.responsive.min.js" charset="utf-8"></script>
+  <script src="https://cdn.datatables.net/1.10.21/js/dataTables.jqueryui.min.js" charset="utf-8"></script>
+  <script src="https://cdn.datatables.net/responsive/2.2.5/js/responsive.jqueryui.min.js" charset="utf-8"></script>
+  <!-- my scripts -->
+  <script src="js/script.js" charset="utf-8"></script>
+  <footer id="footer">
+    <p class="copyrights">© 2020 Company Directory</p>
+  </footer>
+</body>
+
+</html>
