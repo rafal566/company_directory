@@ -2,12 +2,10 @@
 
 include("config.php");
 
-$conn = mysqli_connect($cd_host, $cd_user, $cd_socket, $cd_dbname, $cd_port, $cd_password);
-// $conn = new mysqli($cd_host, $cd_user, $cd_password, $cd_dbname, $cd_port, $cd_socket);
+// $conn = mysqli_connect($cd_host, $cd_user, $cd_socket, $cd_dbname, $cd_port, $cd_password);
+$conn = new mysqli($cd_host, $cd_user, $cd_password, $cd_dbname, $cd_port, $cd_socket);
 
 if(isset($_POST["userID"])) {
-    // $temp_id = $_POST['id'];
-    // $id= (int)$temp_id;
     $rowID = $conn->real_escape_string($_POST['userID']);
     $sql = $conn->query("SELECT * FROM personnel WHERE id='$rowID'");
     $data = $sql->fetch_array();

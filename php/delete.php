@@ -2,8 +2,8 @@
 
 include("config.php");
 
-$conn = mysqli_connect($cd_host, $cd_user, $cd_socket, $cd_dbname, $cd_port, $cd_password);
-// $conn = new mysqli($cd_host, $cd_user, $cd_password, $cd_dbname, $cd_port, $cd_socket);
+// $conn = mysqli_connect($cd_host, $cd_user, $cd_socket, $cd_dbname, $cd_port, $cd_password);
+$conn = new mysqli($cd_host, $cd_user, $cd_password, $cd_dbname, $cd_port, $cd_socket);
 
 $temp_id = $_POST['userID'];
 $userID = (int)$temp_id;
@@ -14,6 +14,5 @@ $userID = (int)$temp_id;
   <button type='button' class='close' data-dismiss='alert'>&times;</button>
   Record deleted!
   </div>";
-  // mysqli_close($conn);
 
     ?>
