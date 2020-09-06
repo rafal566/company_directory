@@ -18,6 +18,10 @@ h4 {
   color: #f5f7f7;
 }
 
+#userDataWrapper{
+  max-width: 90%;
+}
+
 
 /* alerts */
 .alert {
@@ -113,21 +117,11 @@ table.dataTable>tbody>tr.child span.dtr-title {
   min-width: 120px;
 }
 
-/* table.dataTable.no-footer {
-  border-bottom: 2px solid #72b5b7;
-  border-top: 2px solid #72b5b7;
-} */
-
 
 /* output massage */
-#message {
-  width: 30%;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+#info_message {
   text-align: center;
-  z-index: 99999999;
+  font-weight: bolder;
 }
 
 @media only screen and (max-width: 500px) {
@@ -135,15 +129,6 @@ table.dataTable>tbody>tr.child span.dtr-title {
     display: block;
     min-width: 150px;
     font-weight: bold;
-  }
-
-  .alert {
-    padding: .75rem 1.25rem;
-    margin-bottom: 0;
-  }
-
-  #message {
-    width: 60%;
   }
 }
 

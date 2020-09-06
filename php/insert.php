@@ -1,59 +1,132 @@
 <?php
+include ("config.php");
 
-include("config.php");
+$executionStartTime = microtime(true);
 
-// $conn = mysqli_connect($cd_host, $cd_user, $cd_socket, $cd_dbname, $cd_port, $cd_password);
-$conn = new mysqli($cd_host, $cd_user, $cd_password, $cd_dbname, $cd_port, $cd_socket);
+header('Content-Type: application/json; charset=UTF-8');
+
+$conn = mysqli_connect($cd_host, $cd_user, $cd_socket, $cd_dbname, $cd_port, $cd_password);
+// $conn = new mysqli($cd_host, $cd_user, $cd_password, $cd_dbname, $cd_port, $cd_socket);
+if (mysqli_connect_errno())
+{
+
+    $output['status']['code'] = "300";
+    $output['status']['name'] = "failure";
+    $output['status']['description'] = "database unavailable";
+    $output['status']['returnedIn'] = (microtime(true) - $executionStartTime) / 1000 . " ms";
+    $output['data'] = [];
+
+    mysqli_close($conn);
+
+    echo json_encode($output);
+
+    exit;
+
+}
 
 $firstName = $conn->real_escape_string($_POST['firstName']);
-$lastName= $conn->real_escape_string($_POST['lastName']);
+$lastName = $conn->real_escape_string($_POST['lastName']);
 $jobTitle = $conn->real_escape_string($_POST['jobTitle']);
 $email = $conn->real_escape_string($_POST['email']);
 $temp_department = $_POST['departmentID'];
 $department = (int)$temp_department;
 
+if (isset($_POST["operation"]))
+{
 
-if(isset($_POST["operation"])) {
+    if ($_POST["operation"] == "Add")
+    {
 
-  if($_POST["operation"] == "Add") {
+        $result = $conn->query("SELECT id FROM personnel WHERE email = '$email'");
 
-    $sql = $conn->query("SELECT id FROM personnel WHERE email = '$email'");
+        if (!$result)
+        {
 
-          if($sql->num_rows > 0) {
-            echo "<div class='alert alert-warning alert-dismissible' id='myAlertWarning'>
-            <button type='button' class='close' data-dismiss='alert'>&times;</button>
-            Record already exists!
-            </div>";
-          } else {
-            $query = "INSERT INTO `personnel` (`firstName`, `lastName`, `jobTitle`, `email`, `departmentID`) VALUES (
+            $output['status']['code'] = "400";
+            $output['status']['name'] = "executed";
+            $output['status']['description'] = "query failed";
+            $output['data'] = [];
+
+            mysqli_close($conn);
+
+            echo json_encode($output);
+
+            exit;
+
+        }
+
+        if ($result->num_rows > 0)
+        {
+
+            $output['status']['code'] = "200";
+            $output['status']['name'] = "ok";
+            $output['status']['description'] = "Record exists";
+            $output['status']['returnedIn'] = (microtime(true) - $executionStartTime) / 1000 . " ms";
+            $output['data'] = [];
+
+            mysqli_close($conn);
+
+            echo json_encode($output);
+
+        }
+        else
+        {
+
+            $query = "INSERT INTO personnel (firstName, lastName, jobTitle, email, departmentID) VALUES (
             '$firstName', '$lastName', '$jobTitle', '$email', '$department')";
 
-            $sql= $conn->query($query);
+            $result = $conn->query($query);
 
             $lastID = $conn->insert_id;
 
-            echo "<div class='alert alert-success alert-dismissible' id='myAlertSuccess'>
-            <button type='button' class='close' data-dismiss='alert'>&times;</button>
-            Record added!
-            </div>";
-          };
+            $output['status']['code'] = "200";
+            $output['status']['name'] = "ok";
+            $output['status']['description'] = "Record added";
+            $output['status']['returnedIn'] = (microtime(true) - $executionStartTime) / 1000 . " ms";
+            $output['data'] = [];
 
-  }
+            mysqli_close($conn);
 
-  if($_POST["operation"] == "Edit") {
-    $rowID = $conn->real_escape_string($_POST['userID']);
+            echo json_encode($output);
+        };
 
-    // $conn->query("UPDATE personnel SET firstName='$firstName', lastName='$lastName', jobTitle='$jobTitle',
-    //   email='$email', departmentID='$department' WHERE id='$rowID'");
+    }
 
-    $conn->query("UPDATE personnel SET firstName='$firstName', lastName='$lastName', jobTitle='$jobTitle',
-      email='$email', departmentID='$department' WHERE id='$rowID'");
+    if ($_POST["operation"] == "Edit")
+    {
+        $rowID = $conn->real_escape_string($_POST['userID']);
 
-      echo "<div class='alert alert-success alert-dismissible' id='myAlertSuccess'>
-      <button type='button' class='close' data-dismiss='alert'>&times;</button>
-      Record updated!
-      </div>";
-  }
+        $query = "UPDATE personnel SET firstName='$firstName', lastName='$lastName', jobTitle='$jobTitle',
+      email='$email', departmentID='$department' WHERE id = " . $rowID;
+        $result = $conn->query($query);
+
+        if (!$result)
+        {
+
+            $output['status']['code'] = "400";
+            $output['status']['name'] = "executed";
+            $output['status']['description'] = "query failed";
+            $output['data'] = [];
+
+            mysqli_close($conn);
+
+            echo json_encode($output);
+
+            exit;
+
+        }
+
+        $output['status']['code'] = "200";
+        $output['status']['name'] = "ok";
+        $output['status']['description'] = "Record updated";
+        $output['status']['returnedIn'] = (microtime(true) - $executionStartTime) / 1000 . " ms";
+        $output['data'] = [];
+
+        mysqli_close($conn);
+
+        echo json_encode($output);
+    }
+
 }
 
 ?>
